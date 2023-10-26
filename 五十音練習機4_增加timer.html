@@ -247,20 +247,27 @@
         }
 
         function selectKana() {
-            // 獲取所有被選擇的元素
-            var selectedElements = Array.from(document.querySelectorAll('#kanaSelection input[type=checkbox]:checked'));
-            
-            // 更新題庫為選擇的元素的值
-            kanaList = selectedElements.map(element => {
-		const textContent = element.nextElementSibling.textContent;
-    		const cleanText = textContent.split('(')[0].trim(); // Extract text before '(' and trim spaces
-    		return cleanText;	    
-	    });
-	    // console.log(kanaList);
-            answeredQuestions = []; //清空
-            updateRemainingQuestions();
-	    generateRandomKana();
-        }
+    // 獲取所有被選擇的元素
+    var selectedElements = Array.from(document.querySelectorAll('#kanaSelection input[type=checkbox]:checked'));
+    
+    // 如果選擇的元素數量為 0，顯示提示框並返回
+    if (selectedElements.length === 0) {
+        alert("請至少選擇一個片假名進行練習！");
+        return;
+    }
+
+    // 更新題庫為選擇的元素的值
+    kanaList = selectedElements.map(element => {
+        const textContent = element.nextElementSibling.textContent;
+        const cleanText = textContent.split('(')[0].trim(); // Extract text before '(' and trim spaces
+        return cleanText;    
+    });
+
+    answeredQuestions = []; //清空
+    updateRemainingQuestions();
+    generateRandomKana();
+}
+
 
         function checkAnswer(event) {
             if (event.key === 'Enter') {
