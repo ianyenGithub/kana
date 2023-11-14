@@ -6,7 +6,7 @@
     <title>五十音練習機</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: '標楷體', 'KaiTi', sans-serif;
             text-align: center;
             margin: 20px;
 	    	-webkit-user-select: none; /* Chrome, Safari, Opera */
@@ -52,10 +52,54 @@
             transform: scale(1.8); /* 调整复选框的大小 */
             margin-right: 5px; /* 为了给复选框和标签之间留出一些空间 */
         }
+	.back-icon {
+      width: 40px; 
+      height: 40px; 
+      margin-right: 5px;
+      vertical-align: middle;
+      fill: #8bc34a; /* 將圖標顏色設為藍色 */
+      transform: rotate(0deg); /* 旋轉圖標使箭頭彎曲向上 */
+    }
+  .flip-horizontal {
+      transform: scaleX(-1);
+    }
     </style>
 </head>
 <body>
-    <h1>五十音練習機</h1>
+    <h1>五十音練習機
+
+<a href="index.html">
+    <svg class="back-icon flip-horizontal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280.000000 895.000000">
+      <g transform="translate(0.000000,895.000000) scale(0.100000,-0.100000)"
+fill="#8bc34a" stroke="none">
+<path d="M8005 8764 c-82 -58 -154 -109 -158 -113 -10 -10 34 -110 231 -522
+481 -1007 568 -1204 588 -1328 6 -39 5 -43 -12 -37 -10 3 -102 28 -204 56
+-1276 349 -2307 501 -3520 517 -1251 16 -2424 -119 -3735 -431 -340 -80 -369
+-88 -379 -97 -11 -10 -28 -215 -226 -2693 -22 -275 -37 -503 -33 -507 10 -9
+341 43 703 110 630 116 1593 248 2310 315 724 69 1263 96 1885 96 1097 0 1929
+-102 2698 -331 197 -59 217 -67 217 -88 0 -23 -100 -198 -181 -316 -119 -174
+-248 -332 -398 -487 -232 -240 -315 -314 -1136 -1013 -121 -103 -220 -192
+-220 -197 0 -13 208 -338 217 -338 4 0 139 61 300 136 161 75 451 206 643 291
+193 86 490 221 660 300 868 406 2381 1041 3215 1349 300 111 608 233 615 243
+5 9 -91 375 -134 511 -238 753 -617 1425 -1196 2120 -373 447 -764 843 -1675
+1695 -211 198 -502 474 -646 613 -144 138 -266 252 -271 251 -4 0 -75 -48
+-158 -105z m1149 -1400 c1050 -983 1582 -1610 1990 -2345 156 -282 282 -572
+387 -893 47 -144 57 -182 47 -192 -7 -6 -265 -112 -573 -234 -688 -273 -987
+-395 -1825 -747 -585 -246 -794 -337 -1175 -512 -100 -46 -135 -58 -135 -47 0
+2 78 82 173 177 384 387 568 640 711 980 44 105 136 383 136 411 0 15 -293
+129 -500 195 -664 213 -1419 333 -2350 374 -332 15 -1182 6 -1555 -16 -883
+-51 -1664 -136 -2720 -296 -253 -38 -524 -79 -603 -91 -78 -12 -144 -19 -147
+-16 -3 2 25 369 60 814 59 735 92 1163 110 1440 4 56 10 106 13 111 4 6 106
+34 227 62 860 198 1668 316 2545 372 271 17 1037 23 1315 10 833 -39 1575
+-139 2340 -316 392 -91 652 -165 1070 -304 231 -77 303 -97 311 -88 6 7 31 80
+55 162 l44 150 0 170 c0 146 -3 182 -23 255 -43 160 -81 251 -246 593 -47 98
+-86 183 -86 190 0 6 19 -7 43 -29 23 -22 186 -175 361 -340z"/>
+<path d="M7913 1836 c-128 -42 -358 -238 -427 -367 -27 -49 -28 -51 -9 -71 15
+-17 26 -19 71 -14 72 8 207 56 303 108 151 80 235 164 246 246 11 83 -80 132
+-184 98z"/>
+</g>
+    </svg>
+  </a></h1>
     
     <label for="kana">片假名：</label>
     <select id="kana" disabled>
@@ -120,7 +164,9 @@
     <br><br>
 
     <label for="answer">輸入羅馬拼音：</label>
+<br><br>
     <input type="text" id="answer" onkeydown="checkAnswer(event)">
+<button onclick="checkByClick()">檢查答案</button>
 
     <div id="result"></div>
     <div id="remainingQuestions"></div>
@@ -267,7 +313,35 @@
     updateRemainingQuestions();
     generateRandomKana();
 }
+	function checkByClick(event){
+var userAnswer = document.getElementById("answer").value.toLowerCase();
+		// 獲取<select>元素
+		var selectElement = document.getElementById('kana');
+		// 獲取被選擇的選項的索引
+		var selectedIndex = selectElement.selectedIndex;
+		// 獲取被選擇的選項的值（例如，"あ (ア)"）
+		var selectedValue = selectElement.options[selectedIndex].text;
+                var currentKana = document.getElementById("kana").value;
+                var correctAnswer = getRomaji(currentKana);
 
+                var resultDiv = document.getElementById("result");
+
+                if (userAnswer === correctAnswer) {
+                    resultDiv.style.color = "green";
+                    resultDiv.innerText = "「" + selectedValue + "」" + "你寫的是：" + userAnswer + "，正確！";
+                    correctAnswers.push(currentKana);
+                    answeredQuestions.push(currentKana);
+		    updateRemainingQuestions();
+                    generateRandomKana();
+		    updateRemainingQuestions();
+                } else {
+                    resultDiv.style.color = "red";
+                    resultDiv.innerText = "你寫的是：" + userAnswer + "，錯誤，正確答案是：" + correctAnswer + "「" + selectedValue + "」";
+                    generateRandomKana();
+                }
+
+                document.getElementById("kana").disabled = true;
+}
 
         function checkAnswer(event) {
             if (event.key === 'Enter') {
