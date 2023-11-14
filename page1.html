@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>日文中文字詞練習</title>
+  <style>
+  table {
+    width: 100%; /* 表格寬度 100% */
+    margin: auto; /* 將表格置中 */
+    text-align: center; /* 將表格內容置中 */
+    border-collapse: collapse; /* 合併邊框 */
+  }
+  th, td {
+    padding: 15px; /* 單元格內間距 */
+    font-size: 40px; /* 字體大小 */
+    transition: background-color 0.3s; /* 添加過渡效果 */
+  }
+  td span {
+    display: none; /* 初始時隱藏中文意義 */
+  }
+  td:hover {
+    background-color: #3498db; /* 懸停時顯示藍色背景 */
+  }
+  td:hover span {
+    display: inline; /* 懸停時顯示中文意義 */
+  }
+
+  h1 {
+    text-align: center; /* 將標題置中 */
+  }
+  body {
+    font-family: '標楷體', 'KaiTi', sans-serif;
+  }
+  .back-icon {
+      width: 40px; 
+      height: 40px; 
+      margin-right: 5px;
+      vertical-align: middle;
+      fill: #8bc34a; /* 將圖標顏色設為藍色 */
+      transform: rotate(0deg); /* 旋轉圖標使箭頭彎曲向上 */
+    }
+  .flip-horizontal {
+      transform: scaleX(-1);
+    }
+  /* 增加 @media 查詢，針對手機設備字體進行調整 */
+  @media only screen and (max-width: 600px) {
+    th, td {
+      font-size: 14px; /* 手機上的字體大小 */
+    }
+  }
+</style>
+</head>
+<body>
+
+<h1>日文中文字詞練習
+  <a href="index.html">
+    <svg class="back-icon flip-horizontal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280.000000 895.000000">
+      <g transform="translate(0.000000,895.000000) scale(0.100000,-0.100000)"
+fill="#8bc34a" stroke="none">
+<path d="M8005 8764 c-82 -58 -154 -109 -158 -113 -10 -10 34 -110 231 -522
+481 -1007 568 -1204 588 -1328 6 -39 5 -43 -12 -37 -10 3 -102 28 -204 56
+-1276 349 -2307 501 -3520 517 -1251 16 -2424 -119 -3735 -431 -340 -80 -369
+-88 -379 -97 -11 -10 -28 -215 -226 -2693 -22 -275 -37 -503 -33 -507 10 -9
+341 43 703 110 630 116 1593 248 2310 315 724 69 1263 96 1885 96 1097 0 1929
+-102 2698 -331 197 -59 217 -67 217 -88 0 -23 -100 -198 -181 -316 -119 -174
+-248 -332 -398 -487 -232 -240 -315 -314 -1136 -1013 -121 -103 -220 -192
+-220 -197 0 -13 208 -338 217 -338 4 0 139 61 300 136 161 75 451 206 643 291
+193 86 490 221 660 300 868 406 2381 1041 3215 1349 300 111 608 233 615 243
+5 9 -91 375 -134 511 -238 753 -617 1425 -1196 2120 -373 447 -764 843 -1675
+1695 -211 198 -502 474 -646 613 -144 138 -266 252 -271 251 -4 0 -75 -48
+-158 -105z m1149 -1400 c1050 -983 1582 -1610 1990 -2345 156 -282 282 -572
+387 -893 47 -144 57 -182 47 -192 -7 -6 -265 -112 -573 -234 -688 -273 -987
+-395 -1825 -747 -585 -246 -794 -337 -1175 -512 -100 -46 -135 -58 -135 -47 0
+2 78 82 173 177 384 387 568 640 711 980 44 105 136 383 136 411 0 15 -293
+129 -500 195 -664 213 -1419 333 -2350 374 -332 15 -1182 6 -1555 -16 -883
+-51 -1664 -136 -2720 -296 -253 -38 -524 -79 -603 -91 -78 -12 -144 -19 -147
+-16 -3 2 25 369 60 814 59 735 92 1163 110 1440 4 56 10 106 13 111 4 6 106
+34 227 62 860 198 1668 316 2545 372 271 17 1037 23 1315 10 833 -39 1575
+-139 2340 -316 392 -91 652 -165 1070 -304 231 -77 303 -97 311 -88 6 7 31 80
+55 162 l44 150 0 170 c0 146 -3 182 -23 255 -43 160 -81 251 -246 593 -47 98
+-86 183 -86 190 0 6 19 -7 43 -29 23 -22 186 -175 361 -340z"/>
+<path d="M7913 1836 c-128 -42 -358 -238 -427 -367 -27 -49 -28 -51 -9 -71 15
+-17 26 -19 71 -14 72 8 207 56 303 108 151 80 235 164 246 246 11 83 -80 132
+-184 98z"/>
+</g>
+    </svg>
+  </a>
+</h1>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>日文</th>
+      <th id="hidden-col">中文意義</th>
+    </tr>
+  </thead>
+  <tbody id="data-body"></tbody>
+</table>
+
+<script>
+  // 直接將文本數據放在JavaScript中
+  const data = `こんにちは,你好
+                ありがとう,謝謝
+                さようなら,再見
+                おはよう,早安
+                こんばんは,晚安
+		こんにちは,你好
+                ありがとう,謝謝
+                さようなら,再見
+                おはよう,早安
+                こんばんは,晚安`;
+
+  // 將文本數據轉換成二維數組
+  const lines = data.split('\n');
+  const csvRows = lines.map(line => line.split(','));
+
+  // 遍歷數組並插入表格中
+  const tbody = document.getElementById('data-body');
+  csvRows.forEach(row => {
+    const tr = document.createElement('tr');
+    row.forEach((cell, index) => {
+      const td = document.createElement('td');
+      tr.appendChild(td);
+
+      // 如果是第一列（日文列），直接顯示
+      if (index === 0) {
+        td.textContent = cell;
+      }
+      // 如果是第二列（中文意義列），加上span顯示中文意義
+      else if (index === 1) {
+        td.innerHTML = `<span>${cell}</span>`;
+      }
+    });
+    tbody.appendChild(tr);
+  });
+</script>
+
+</body>
+</html>
